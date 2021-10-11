@@ -32,7 +32,7 @@ RUN \
         ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 RUN \ 
-    git clone https://github.com/alphacep/kaldi /opt/kaldi \
+    git clone https://github.com/zzvkaa/kaldi /opt/kaldi \
     && cd /opt/kaldi/tools \
     && sed -i 's:status=0:exit 0:g' extras/check_dependencies.sh \
   #      && sed -i 's:--enable-ngram-fsts:--enable-ngram-fsts --disable-bin:g' Makefile \
@@ -54,13 +54,13 @@ RUN \
   #      && make -j $(nproc) online2 lm rnnlm \
     && make -j $(nproc) online2 lm rnnlm latbin online2bin lmbin rnnlmbin fstbin bin \
     \
-    && git clone https://github.com/alphacep/vosk-api /opt/vosk-api \
+    && git clone https://github.com/zzvkaa/vosk-api /opt/vosk-api \
     && cd /opt/vosk-api/src \
     && KALDI_MKL=$KALDI_MKL KALDI_ROOT=/opt/kaldi make -j $(nproc) \
     && cd /opt/vosk-api/python \
     && python3 ./setup.py install \
     \
-    && git clone https://github.com/alphacep/vosk-server /opt/vosk-server \
+    && git clone https://github.com/zzvkaa/vosk-server /opt/vosk-server \
     && pip3 install grpcio-tools \
     && cd /opt/vosk-server/grpc \
     && python3 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. stt_service.proto \
@@ -104,7 +104,7 @@ RUN \
     #&& cd /opt/vosk-model-ru/model/new/russian_g2p_neuro \
     #&& /opt/ve/bin/python3 ./setup.py install \
     && cd /opt/vosk-model-ru/model/new/kenlm \
-    && git clone https://github.com/kpu/kenlm.git . \
+    && git clone https://github.com/zzvkaa/kenlm.git . \
     && mkdir ./build \
     && cd ./build \
     && cmake .. \
